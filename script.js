@@ -9,7 +9,7 @@ function calculator() {
 
     let currentOperand = ""
     let previousOperand = ""
-    let operation = ""
+    let operation = undefined
 
     function handleButtons() {
         numButtons.forEach(btn => {
@@ -26,7 +26,7 @@ function calculator() {
                 if(currentOperand === "")return
                 operation = btn.textContent
                 operate()
-                updateDisplay()
+                
             })
         })
 
@@ -53,7 +53,7 @@ function calculator() {
         acButton.addEventListener('click',()=>{
             currentOperand = 0
             previousOperand = ""
-            operation = ""
+            operation = undefined
             updateDisplay()
         })
 
@@ -69,8 +69,9 @@ function calculator() {
            calculateResults()
         }
 
-        previousOperand = `${currentOperand} ${operation}`
+        previousOperand = `${currentOperand}${operation}`
         currentOperand = ""
+        updateDisplay()
         
     }
 
@@ -88,12 +89,13 @@ function calculator() {
         :'';
 
         currentOperand = results
-        operation = "" 
+        operation = undefined 
         previousOperand = ""
 
     }
 
     function updateDisplay() {
+        previousText = ""
         currentText.textContent = currentOperand
         previousText.textContent = previousOperand
     }
